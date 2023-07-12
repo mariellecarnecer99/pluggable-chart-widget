@@ -5,9 +5,18 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import federation from '@originjs/vite-plugin-federation'
+
+const APPLICATION_PORT = 3001;
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: APPLICATION_PORT,
+  },
+  preview: {
+    port: APPLICATION_PORT,
+  },
   plugins: [
     vue({ 
       template: { transformAssetUrls }
@@ -18,6 +27,14 @@ export default defineConfig({
       styles: {
         configFile: 'src/styles/settings.scss',
       },
+    }),
+    federation({
+      name: "pluggable-widget",
+      filename: "pluggableWidget.js",
+      exposes: {
+        "./App": "./src/App.vue",
+      },
+      shared: ["vue"],
     }),
   ],
   define: { 'process.env': {} },
@@ -34,8 +51,5 @@ export default defineConfig({
       '.tsx',
       '.vue',
     ],
-  },
-  server: {
-    port: 3000,
   },
 })

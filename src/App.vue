@@ -1,13 +1,15 @@
 <template>
   <!-- <router-view /> -->
-  <div id="app">
-    <h1>Pluggable Chart</h1>
-    <v-chart
-      class="chart"
-      :option="option"
-      autoresize
-      style="height: 500px; width: 1367px"
-    />
+  <div>
+    <v-card>
+      <h1>Pluggable Chart</h1>
+      <v-chart
+        class="chart"
+        :option="option"
+        autoresize
+        style="height: 500px; width: 1367px"
+      />
+    </v-card>
   </div>
 </template>
 
